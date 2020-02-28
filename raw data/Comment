@@ -1,0 +1,6 @@
+Comment {
+  userID: ObjectID, required
+  content: String, required, limit
+  postID: ObjectID, required, 
+  commentID: ObjectID,
+}
