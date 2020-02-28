@@ -1,0 +1,22 @@
+BlogPost: {
+  title: String, trim, required,
+  closed: boolean,required,
+  author: ObjectId, default: "unknow",
+  createdAt: Date, default: Date.now(), required,
+  description: String, trim, required,
+  summary: String, trim, required,
+  imageCover: String,
+  tags: [
+    <!-- life -->: boolean,
+    <!-- tech -->: boolean,
+    <!-- daily-trick -->: boolean,
+    ...
+    /** @Tag collection reference Tag.tag*/
+  ], 
+  content: String<Markdown>, required,
+  images: [String],
+  category: ObjectId
+}
+
+* Nếu có thể thì đưa ảnh vào trong markdown cũng được, không cần phải trỏ tới `images`
+* Image cover: vì là bài viết nên thỉnh thoảng không có chụp ảnh cover =))

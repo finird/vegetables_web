@@ -1,0 +1,52 @@
+Product issues:
+  Sales
+  Organic
+  Category
+
+Product: {
+  name: String, trim, 
+  ratingAverage: Double,
+  ratingsQuantity: Number, default: 0,
+  price: Double(ex: 40.500VND/kg = 40.5), required,
+  discount: {
+    price: Double,
+    start: Date,
+    limitTime: Number<Seconds>
+  },
+  createdAt: Date, default: Date.now(), required,
+  harvestedAt: Date,
+  description: String, trim,
+  summary: String, trim
+  farm: ObjectID,
+  images: [String],
+  imageCover: String, required,
+  sizes: {
+    required,
+    small: boolean,
+    medium: boolean,
+    large: boolean,
+    extra large: boolean
+  }, 
+  quantity: {
+    quantity: Double, 
+    (*) min: 100,
+    required
+  },
+  unit: String (ex: "kg", "mg", "ton", "litter", "kg"...), required
+  sold: Double (ex: as quantity),
+  organic: boolean, required,
+  category: ObjectID,
+  storageTime: Number<Days>
+}
+
+(*): 1 suất bán tối thiểu: ví dụ bán đường tối thiểu 100 grams thì:
+  {
+    ...
+    quantity: xxx, min: 100,
+    unit: "gram",
+    ...
+  }
+
+Coding requirements:
+  summary <= 400 characters,
+  createdAt > harvestedAt

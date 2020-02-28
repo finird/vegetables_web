@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-const mysql = require('mysql');
+const mongoose = require('mongoose');
 
 dotenv.config({
   path: `${__dirname}/.env`
@@ -7,17 +7,15 @@ dotenv.config({
 
 const app = require('./app');
 
-const con = mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'admin',
-  password: process.env.DB_PASSWORD || undefined,
-  database: process.env.DB || 'test'
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log('👌 Database Server connected');
-});
+const db = process.env.DB.replace('<DB_NAME>', process.env.DB_NAME);
+mongoose
+  .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  })
+  .then(_ => console.log('Database connection successful. 👌'))
+  .catch(err => console.log('Database connection failed! 💥\n', err));
 
 const port = process.env.HOST_PORT || 3000;
 const host = process.env.HOST_HOST || '127.0.0.1';
