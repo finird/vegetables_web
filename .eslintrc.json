@@ -3,6 +3,7 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
+    "jsx-quotes": "off",
     "spaced-comment": "off",
     "no-console": "warn",
     "consistent-return": "off",
