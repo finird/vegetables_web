@@ -1,4 +1,5 @@
-const { Schema } = require('mongoose');
+const mongoose = require('mongoose');
+const {Schema} = mongoose;
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
@@ -89,11 +90,10 @@ userSchema.pre('save', function(next) {
 
 userSchema.methods = {
   authenticate: function(password) {
-    bcrypt.compare(password, this.password, function(err, isMatch) {
-      if (err) {
-        throw new Error(err);
-      }
-      return isMatch;
+    const hash =  bcrypt.hashSync(password, this.salt, (err, hash) => {
     });
+    return hash === this.password;
   }
 };
+const User = mongoose.model('User', userSchema, 'User');
+module.exports = User;
