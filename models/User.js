@@ -63,6 +63,10 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now()
   },
+  loginAt: {
+    type: Date,
+    default: Date.now()
+  },
   address: {
     type: String,
     default: '',

@@ -43,7 +43,7 @@ exports.loginUser = async (req, res) => {
       email
     };
   }
-  User.findOne(options, (err, user) => {
+  User.findOne(options, async (err, user) => {
     // if err or no user
     if (err || !user) {
       return res.status(BAD_REQUEST).json({
@@ -59,17 +59,12 @@ exports.loginUser = async (req, res) => {
     }
     const token = jwt.sign(
       {
-        id: user._id,
-        roles: user.roles,
-        last_name: user.last_name,
-        first_name: user.first_name,
-        email: user.email,
-        address: user.address,
-        createAt: user.createAt,
-        username: user.username
+        id: user._id
       },
       process.env.JWT_SECRET
     );
+    user.loginAt = new Date();
+    await user.save();
     res.cookie('t', token, {
       expire: new Date() + 9999
     });
