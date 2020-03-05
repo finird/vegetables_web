@@ -89,9 +89,8 @@ userSchema.pre('save', function(next) {
 });
 
 userSchema.methods = {
-  authenticate: function(password) {
-    const hash =  bcrypt.hashSync(password, this.salt, (err, hash) => {
-    });
+  authenticate: async function(password) {
+    const hash = await bcrypt.hashSync(password, this.salt);
     return hash === this.password;
   }
 };

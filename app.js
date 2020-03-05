@@ -3,11 +3,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const homeRoute = require('./routes/homeRouter');
 const cors = require('cors');
-
 const app = express();
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
+
 app.use(cors({
   optionsSuccessStatus: 200,
 }));

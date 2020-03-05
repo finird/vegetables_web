@@ -21,7 +21,9 @@
     "http-status-codes": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.2",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
