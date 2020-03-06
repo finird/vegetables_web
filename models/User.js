@@ -97,9 +97,8 @@ userSchema.pre('save', function(next) {
     const hash = bcrypt.hashSync(user.password, user.salt);
     user.password = hash;
     next();
-  } catch(err) {
-    if (err) 
-      return next();
+  } catch (err) {
+    if (err) return next();
   }
 });
 
