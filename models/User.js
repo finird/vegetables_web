@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const { Schema } = mongoose;
-const bcrypt = require('bcrypt');
+const userRoles = require('../constant/userRoles');
 const rolesEnum = require('../constant/roleEnum');
+
 const userSchema = new Schema({
   last_name: {
     type: String,
@@ -48,8 +50,13 @@ const userSchema = new Schema({
   },
   roles: {
     type: String,
-    enum: [rolesEnum.Guest, rolesEnum.Admin, rolesEnum.Edit, rolesEnum.Receptionist],
-    default: rolesEnum.Guest,
+    enum: [
+      userRoles.Guest,
+      userRoles.Admin,
+      userRoles.Edit,
+      userRoles.Receptionist
+    ],
+    default: userRoles.Guest,
     require: true
   },
   salt: {
