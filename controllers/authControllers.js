@@ -2,11 +2,12 @@ const { OK, BAD_REQUEST } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-exports.getAllUsers = (req, res) => {
+exports.getAllUsers = async (req, res) => {
+  const users = await User.find();
   return res.status(OK).json({
     status: OK,
     data: {
-      ok: 'Data users'
+      users
     }
   });
 };
@@ -22,11 +23,15 @@ exports.getUserById = (req, res) => {
 };
 exports.registerUser = (req, res) => {
   const user = new User(req.body);
-  user.save(function(err) {
-    if (err) {
-      return new Error(err);
+  console.log(user);
+  user.save(function(error) {
+    console.log(error);
+    if (!Object.keys(error).length) {
+      return res.status(BAD_REQUEST).json({
+        error
+      });
     }
-    res.status(OK).json({
+    return res.status(OK).json({
       user
     });
   });
@@ -57,8 +62,7 @@ exports.loginUser = async (req, res) => {
         error: 'Email and password do not match'
       });
     }
-    const token = jwt.sign(
-      {
+    const token = jwt.sign({
         id: user._id
       },
       process.env.JWT_SECRET
@@ -77,9 +81,16 @@ exports.loginUser = async (req, res) => {
   });
 };
 exports.currentUser = (req, res) => {
-  console.log('Controller current');
-  console.log(req.user);
-  res.status(200).json({
-    data: req.user
+  res.status(OK).json({
+    data: req.auth
+  });
+};
+exports.editUser = (req, res) => {
+  const { auth } = req;
+  const { id } = req.query;
+  res.status(OK).json({
+    status: OK,
+    id,
+    message: 'Edited'
   });
 };

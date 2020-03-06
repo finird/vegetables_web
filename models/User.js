@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const {Schema} = mongoose;
+
+const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
@@ -53,7 +54,7 @@ const userSchema = new Schema({
   },
   salt: {
     type: String,
-    require: true
+    require: false
   },
   job: {
     type: String,
@@ -84,17 +85,20 @@ const userSchema = new Schema({
 
 userSchema.pre('save', function(next) {
   const user = this;
-  user.salt = bcrypt.genSaltSync(12);
-  bcrypt.hash(user.password, this.salt, function(err, hash) {
-    if (err) return next(err);
+  try {
+    user.salt = bcrypt.genSaltSync(12);
+    const hash = bcrypt.hashSync(user.password, user.salt);
     user.password = hash;
     next();
-  });
+  } catch(err) {
+    if (err) 
+      return next();
+  }
 });
 
 userSchema.methods = {
-  authenticate: async function(password) {
-    const hash = await bcrypt.hashSync(password, this.salt);
+  authenticate: function(password) {
+    const hash = bcrypt.hashSync(password, this.salt);
     return hash === this.password;
   }
 };
