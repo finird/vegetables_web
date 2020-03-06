@@ -6,15 +6,13 @@ const authMiddleware = async (req, res, next) => {
   const token = req.header('Authorization').replace('Bearer ', '');
   const data = jwt.verify(token, process.env.JWT_SECRET);
   try {
-    const user = await User.findOne({ _id: data.id }).select(
-      'id last_name first_name roles createdAt address email username'
-    );
+    const user = await User.findOne({ _id: data.id });
     if (!user) {
       res
         .status(BAD_REQUEST)
         .json({ error: 'Not authorized to access this resource' });
     }
-    req.user = user;
+    req.auth = user;
     req.token = token;
     next();
   } catch (error) {

@@ -2,21 +2,28 @@ const { OK, BAD_REQUEST } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-exports.getAllUsers = (req, res) => {
-  return res.status(OK).json({
-    status: OK,
+const { handleError, handleSuccess } = require('../helper/handle');
+const { SELECT_ALL } = require('../helper/userSelect');
+
+exports.getAllUsers = async (req, res) => {
+  const users = await User.find().select(SELECT_ALL);
+  return handleSuccess(res, {
     data: {
-      ok: 'Data users'
+      users
     }
   });
 };
 exports.getUserById = (req, res) => {
   const { id } = req.params;
-  return res.status(OK).json({
-    status: OK,
+  const user = User.findById(id);
+  if (!user) {
+    return handleError(res, {
+      message: 'User not found'
+    });
+  }
+  return handleSuccess(res, {
     data: {
-      ok: 'Data user by id',
-      id
+      user
     }
   });
 };
@@ -24,10 +31,12 @@ exports.registerUser = (req, res) => {
   const user = new User(req.body);
   user.save(function(err) {
     if (err) {
-      return new Error(err);
+      return handleError(res, {
+        message: err
+      });
     }
-    res.status(OK).json({
-      user
+    return handleSuccess(res, {
+      message: 'Create user success'
     });
   });
 };
@@ -46,15 +55,15 @@ exports.loginUser = async (req, res) => {
   User.findOne(options, async (err, user) => {
     // if err or no user
     if (err || !user) {
-      return res.status(BAD_REQUEST).json({
-        error: 'User with that email does not exist. Please signup.'
+      return handleError(res, {
+        message: 'User with that email does not exist. Please signup.'
       });
     }
     // if user is found make sure the email and password match
     // create authenticate method in model and use here
     if (!user.authenticate(password)) {
-      return res.status(BAD_REQUEST).json({
-        error: 'Email and password do not match'
+      return handleError(res, {
+        message: 'Email and password do not match.'
       });
     }
     const token = jwt.sign(
@@ -68,7 +77,7 @@ exports.loginUser = async (req, res) => {
     res.cookie('t', token, {
       expire: new Date() + 9999
     });
-    return res.status(OK).json({
+    return handleSuccess(res, {
       token,
       expire: new Date() + 9999,
       status: OK,
@@ -77,9 +86,39 @@ exports.loginUser = async (req, res) => {
   });
 };
 exports.currentUser = (req, res) => {
-  console.log('Controller current');
-  console.log(req.user);
-  res.status(200).json({
-    data: req.user
+  const { auth } = req;
+  auth.password = '';
+  auth.salt = '';
+  return handleSuccess(res, {
+    data: auth
+  });
+};
+exports.editUser = async (req, res) => {
+  const { id } = req.query;
+  if (id !== req.auth.id) {
+    return handleError(res, {
+      message: 'Not owned'
+    });
+  }
+  const user = User.findById(id);
+  if (req.body.first_name) user.first_name = req.body.first_name;
+  if (req.body.last_name) user.last_name = req.body.last_name;
+  if (req.body.job) user.first_name = req.body.first_name;
+  if (req.body.address) user.address = req.body.address;
+  if (req.body.about) user.first_name = req.body.about;
+  user.save(error => {
+    if (!Object.keys(error).length) {
+      return handleError(res, {
+        error
+      });
+    }
+    return handleSuccess(res, {
+      message: 'Edit success'
+    });
+  });
+};
+exports.updatePhoto = (req, res) => {
+  return handleSuccess(res, {
+    message: 'Update photo success'
   });
 };
