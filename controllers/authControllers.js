@@ -117,7 +117,7 @@ exports.editUser = async (req, res) => {
       message: 'Not owned'
     });
   }
-  const user = User.findById(id);
+  const user = await User.findById(id);
   if (req.body.first_name) user.first_name = req.body.first_name;
   if (req.body.last_name) user.last_name = req.body.last_name;
   if (req.body.job) user.first_name = req.body.first_name;
@@ -146,7 +146,6 @@ exports.updatePhoto = async (req, res) => {
     const filename = await fileUpload.save(req.file.buffer);
     user.photo = `${imagePath}/${filename}`;
     user.save(err => {
-      console.log(err);
       if (err) {
         return handleError(res, {
           message: err
@@ -157,7 +156,6 @@ exports.updatePhoto = async (req, res) => {
       });
     });
   } catch (error) {
-    console.log(error);
     return handleError(res, {
       message: error
     });
