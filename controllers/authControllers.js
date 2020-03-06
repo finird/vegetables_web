@@ -1,9 +1,10 @@
 const { OK, BAD_REQUEST } = require('http-status-codes');
+const path = require('path');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-
 const { handleError, handleSuccess } = require('../helper/handle');
 const { SELECT_ALL } = require('../helper/userSelect');
+const ResizeImage = require('../helper/resizeImage');
 
 exports.getAllUsers = async (req, res) => {
   const users = await User.find().select(SELECT_ALL);
@@ -28,20 +29,19 @@ exports.getUserById = (req, res) => {
   });
 };
 exports.registerUser = async (req, res) => {
-  if(req.body.username){
-    const user = await User.findOne({username: req.body.username});
-    
-    if(!Object.keys(user).length){
+  if (req.body.username) {
+    const user = await User.findOne({ username: req.body.username });
+    if (!Object.keys(user).length) {
       return res.status(BAD_REQUEST).json({
-        error: "username exist"
+        error: 'username exist'
       });
     }
   }
-  if(req.body.email){
-    const user = await User.findOne({email: req.body.email});
-    if(!Object.keys(user).length) {
+  if (req.body.email) {
+    const user = await User.findOne({ email: req.body.email });
+    if (!Object.keys(user).length) {
       return res.status(BAD_REQUEST).json({
-        error: "email exist"
+        error: 'email exist'
       });
     }
   }
@@ -83,7 +83,8 @@ exports.loginUser = async (req, res) => {
         message: 'Email and password do not match.'
       });
     }
-    const token = jwt.sign({
+    const token = jwt.sign(
+      {
         id: user._id
       },
       process.env.JWT_SECRET
@@ -133,8 +134,32 @@ exports.editUser = async (req, res) => {
     });
   });
 };
-exports.updatePhoto = (req, res) => {
-  return handleSuccess(res, {
-    message: 'Update photo success'
-  });
+exports.updatePhoto = async (req, res) => {
+  const imagePath = path.join('public/images');
+  const fileUpload = new ResizeImage(imagePath);
+  const { id } = req.auth;
+  const user = await User.findById(id);
+  if (!req.file) {
+    return handleSuccess(res, { message: 'Please provide an image' });
+  }
+  try {
+    const filename = await fileUpload.save(req.file.buffer);
+    user.photo = `${imagePath}/${filename}`;
+    user.save(err => {
+      console.log(err);
+      if (err) {
+        return handleError(res, {
+          message: err
+        });
+      }
+      return handleSuccess(res, {
+        filename: `${imagePath}/${filename}`
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    return handleError(res, {
+      message: error
+    });
+  }
 };

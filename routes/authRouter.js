@@ -5,11 +5,13 @@ const {
   registerUser,
   loginUser,
   currentUser,
-  editUser
+  editUser,
+  updatePhoto
 } = require('../controllers/authControllers');
 const authRoles = require('../middlewares/authRoles.middleware');
 const authMiddleware = require('../middlewares/auth.middleware');
 const userRoles = require('../constant/userRoles');
+const upload = require('../middlewares/upload.middleware');
 
 router.route('/register').post(registerUser);
 router
@@ -19,6 +21,9 @@ router.route('/getAll').get(getAllUsers);
 router.route('/login').post(loginUser);
 router.route('/edit/:id').post(authMiddleware, editUser);
 router.route('/:id').get(getUserById);
-// router.route('/edit/:id').get(authMiddleware, editUser);
+router.route('/edit/:id').get(authMiddleware, editUser);
+router
+  .route('/upload/photo')
+  .post(authMiddleware, upload.single('image'), updatePhoto);
 
 module.exports = router;
