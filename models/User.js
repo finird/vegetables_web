@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 
 const { Schema } = mongoose;
 const userRoles = require('../constant/userRoles');
-const rolesEnum = require('../constant/roleEnum');
 
 const userSchema = new Schema({
   last_name: {

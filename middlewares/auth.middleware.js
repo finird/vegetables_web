@@ -3,7 +3,7 @@ const { BAD_REQUEST } = require('http-status-codes');
 const User = require('../models/User');
 
 const authMiddleware = async (req, res, next) => {
-  if(!req.header('Authorization')){
+  if (!req.header('Authorization')) {
     res
       .status(BAD_REQUEST)
       .json({ error: 'Not authorized to access this resource' });
