@@ -27,7 +27,24 @@ exports.getUserById = (req, res) => {
     }
   });
 };
-exports.registerUser = (req, res) => {
+exports.registerUser = async (req, res) => {
+  if(req.body.username){
+    const user = await User.findOne({username: req.body.username});
+    
+    if(!Object.keys(user).length){
+      return res.status(BAD_REQUEST).json({
+        error: "username exist"
+      });
+    }
+  }
+  if(req.body.email){
+    const user = await User.findOne({email: req.body.email});
+    if(!Object.keys(user).length) {
+      return res.status(BAD_REQUEST).json({
+        error: "email exist"
+      });
+    }
+  }
   const user = new User(req.body);
   user.save(function(err) {
     if (err) {
@@ -66,8 +83,7 @@ exports.loginUser = async (req, res) => {
         message: 'Email and password do not match.'
       });
     }
-    const token = jwt.sign(
-      {
+    const token = jwt.sign({
         id: user._id
       },
       process.env.JWT_SECRET

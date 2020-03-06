@@ -3,6 +3,11 @@ const { BAD_REQUEST } = require('http-status-codes');
 const User = require('../models/User');
 
 const authMiddleware = async (req, res, next) => {
+  if(!req.header('Authorization')){
+    res
+      .status(BAD_REQUEST)
+      .json({ error: 'Not authorized to access this resource' });
+  }
   const token = req.header('Authorization').replace('Bearer ', '');
   const data = jwt.verify(token, process.env.JWT_SECRET);
   try {

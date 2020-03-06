@@ -7,7 +7,8 @@
     "start-dev": "nodemon --inspect server.js",
     "start": "nodemon server.js",
     "start-prod": "NODE_ENV=production & nodemon server.js",
-    "start-prod-windows": "SET NODE_ENV=production & nodemon server.js"
+    "start-prod-windows": "SET NODE_ENV=production & nodemon server.js",
+    "start-db": "docker run -d -p 27017:27017 -v ~/data:/data/db mongo"
   },
   "author": "",
   "license": "ISC",
