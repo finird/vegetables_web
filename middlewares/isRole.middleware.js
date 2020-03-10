@@ -8,17 +8,24 @@ const isRole = async (req, res, next) => {
     return;
   }
   const token = req.header('Authorization').replace('Bearer ', '');
-  const data = jwt.verify(token, process.env.JWT_SECRET);
   try {
-    const user = await User.findOne({ _id: data.id });
-    if (!user) {
+    const data = jwt.verify(token, process.env.JWT_SECRET);
+    try {
+      const user = await User.findOne({ _id: data.id });
+      if (!user) {
+        res.isRole = null;
+        next();
+        return;
+      }
+      req.isRole = user.roles;
+      req.token = token;
+      next();
+    } catch (error) {
       res.isRole = null;
       next();
+      return;
     }
-    req.isRole = user.roles;
-    req.token = token;
-    next();
-  } catch (error) {
+  } catch (err) {
     res.isRole = null;
     next();
   }

@@ -60,7 +60,8 @@ const userSchema = new Schema({
   },
   salt: {
     type: String,
-    require: false
+    require: false,
+    default: null
   },
   job: {
     type: String,
@@ -88,18 +89,15 @@ const userSchema = new Schema({
     trim: true
   }
 });
-
-userSchema.pre('save', function(next) {
+userSchema.pre('save',async function(next) {
   const user = this;
-  const salt = bcrypt.genSaltSync(12);
-  bcrypt.hash(user.password, salt, (err, hash) => {
-    if (err) {
-      console.log(err);
-    }
-    user.salt = salt;
+  if (this.isNew) {
+    user.salt = await bcrypt.genSaltSync(12);
+    const hash = await bcrypt.hashSync(user.password, this.salt);
     user.password = hash;
     next();
-  });
+  }
+  next();
 });
 
 userSchema.methods = {

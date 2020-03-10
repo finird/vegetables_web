@@ -17,9 +17,7 @@ const isRole = require('../middlewares/isRole.middleware');
 
 router.route('/register').post(isRole, registerUser);
 router.route('/current-user').get(authMiddleware, currentUser);
-router
-  .route('/getAll')
-  .get(getAllUsers);
+router.route('/getAll').get(getAllUsers);
 router.route('/login').post(loginUser);
 router.route('/edit/:id').post(authMiddleware, editUser);
 router.route('/:id').get(getUserById);

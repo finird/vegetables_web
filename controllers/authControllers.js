@@ -5,6 +5,7 @@ const User = require('../models/User');
 const { handleError, handleSuccess } = require('../helper/handle');
 const { SELECT_ALL } = require('../helper/userSelect');
 const ResizeImage = require('../helper/resizeImage');
+const roleEnum = require('../constant/roleEnum');
 
 exports.getAllUsers = async (req, res) => {
   const users = await User.find().select(SELECT_ALL);
@@ -29,7 +30,6 @@ exports.getUserById = (req, res) => {
   });
 };
 exports.registerUser = async (req, res) => {
-  console.log(res.isRole);
   if (req.body.username) {
     const user = await User.findOne({ username: req.body.username });
     if (user) {
@@ -47,6 +47,11 @@ exports.registerUser = async (req, res) => {
     }
   }
   const user = new User(req.body);
+  if (user.roles !== roleEnum.Guest && res.isRole !== roleEnum.Admin) {
+    return handleError(res, {
+      message: 'Not authorized to create this resource'
+    });
+  }
   user.save(function(err) {
     if (err) {
       return handleError(res, {
@@ -71,8 +76,6 @@ exports.loginUser = async (req, res) => {
     };
   }
   User.findOne(options, async (err, user) => {
-    // if err or no user
-    console.log(user);
     if (err || !user) {
       return handleError(res, {
         message: 'User with that email does not exist. Please signup.'
