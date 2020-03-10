@@ -91,14 +91,15 @@ const userSchema = new Schema({
 
 userSchema.pre('save', function(next) {
   const user = this;
-  try {
-    user.salt = bcrypt.genSaltSync(12);
-    const hash = bcrypt.hashSync(user.password, user.salt);
+  const salt = bcrypt.genSaltSync(12);
+  bcrypt.hash(user.password, salt, (err, hash) => {
+    if (err) {
+      console.log(err);
+    }
+    user.salt = salt;
     user.password = hash;
     next();
-  } catch (err) {
-    if (err) return next();
-  }
+  });
 });
 
 userSchema.methods = {

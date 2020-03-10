@@ -29,6 +29,7 @@ exports.getUserById = (req, res) => {
   });
 };
 exports.registerUser = async (req, res) => {
+  console.log(res.isRole);
   if (req.body.username) {
     const user = await User.findOne({ username: req.body.username });
     if (user) {
@@ -71,6 +72,7 @@ exports.loginUser = async (req, res) => {
   }
   User.findOne(options, async (err, user) => {
     // if err or no user
+    console.log(user);
     if (err || !user) {
       return handleError(res, {
         message: 'User with that email does not exist. Please signup.'
