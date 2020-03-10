@@ -116,8 +116,8 @@ exports.currentUser = (req, res) => {
   });
 };
 exports.editUser = async (req, res) => {
-  const { id } = req.query;
-  if (id !== req.auth.id) {
+  const { id } = req.params;
+  if (id !== req.auth.id && req.isRole === roleEnum.Admin) {
     return handleError(res, {
       message: 'Not owned'
     });
@@ -142,7 +142,12 @@ exports.editUser = async (req, res) => {
 exports.updatePhoto = async (req, res) => {
   const imagePath = path.join('public/images');
   const fileUpload = new ResizeImage(imagePath);
-  const { id } = req.auth;
+  const { id } = req.query;
+  if (id !== req.auth.id && req.isRole === roleEnum.Admin) {
+    return handleError(res, {
+      message: 'Not owned'
+    });
+  }
   const user = await User.findById(id);
   if (!req.file) {
     return handleSuccess(res, { message: 'Please provide an image' });
@@ -168,6 +173,11 @@ exports.updatePhoto = async (req, res) => {
 };
 exports.deleteUser = async (req, res) => {
   const { id } = req.params;
+  if (id !== req.auth.id && req.isRole === roleEnum.Admin) {
+    return handleError(res, {
+      message: 'Not owned'
+    });
+  }
   const user = await User.findById(id);
   if (user) {
     user.remove();

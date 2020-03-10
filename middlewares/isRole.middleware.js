@@ -18,7 +18,6 @@ const isRole = async (req, res, next) => {
         return;
       }
       req.isRole = user.roles;
-      req.token = token;
       next();
     } catch (error) {
       res.isRole = null;
