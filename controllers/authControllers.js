@@ -33,21 +33,21 @@ exports.registerUser = async (req, res) => {
   if (req.body.username) {
     const user = await User.findOne({ username: req.body.username });
     if (user) {
-      return res.status(BAD_REQUEST).json({
-        error: 'username exist'
+      return handleError(res, {
+        message: 'username exist'
       });
     }
   }
   if (req.body.email) {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      return res.status(BAD_REQUEST).json({
-        error: 'email exist'
+      return handleError(res, {
+        message: 'email exist'
       });
     }
   }
   const user = new User(req.body);
-  if (user.roles !== roleEnum.Guest && res.isRole !== roleEnum.Admin) {
+  if (user.roles !== roleEnum.Guest && req.isRole !== roleEnum.Admin) {
     return handleError(res, {
       message: 'Not authorized to create this resource'
     });
