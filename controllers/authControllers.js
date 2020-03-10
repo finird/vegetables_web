@@ -1,4 +1,3 @@
-const { OK, BAD_REQUEST } = require('http-status-codes');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
@@ -102,7 +101,6 @@ exports.loginUser = async (req, res) => {
     return handleSuccess(res, {
       token,
       expire: new Date() + 9999,
-      status: OK,
       message: 'Login success!'
     });
   });
@@ -143,7 +141,7 @@ exports.updatePhoto = async (req, res) => {
   const imagePath = path.join('public/images');
   const fileUpload = new ResizeImage(imagePath);
   const { id } = req.query;
-  if (id !== req.auth.id && req.isRole === roleEnum.Admin) {
+  if (id !== req.auth.id && req.isRole !== roleEnum.Admin) {
     return handleError(res, {
       message: 'Not owned'
     });
@@ -173,7 +171,7 @@ exports.updatePhoto = async (req, res) => {
 };
 exports.deleteUser = async (req, res) => {
   const { id } = req.params;
-  if (id !== req.auth.id && req.isRole === roleEnum.Admin) {
+  if (id !== req.auth.id && req.isRole !== roleEnum.Admin) {
     return handleError(res, {
       message: 'Not owned'
     });
