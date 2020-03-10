@@ -55,7 +55,7 @@ exports.registerUser = async (req, res) => {
   user.save(function(err) {
     if (err) {
       return handleError(res, {
-        message: err.message
+        message: 'Create user failed'
       });
     }
     return handleSuccess(res, {
