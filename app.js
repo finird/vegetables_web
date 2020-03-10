@@ -8,7 +8,9 @@ const app = express();
 
 app.use(
   cors({
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
+    methods: 'GET, POST, PATCH, PUT, DELETE, HEAD',
+    origin: '*'
   })
 );
 app.use(morgan('dev'));
