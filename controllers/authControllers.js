@@ -31,7 +31,7 @@ exports.getUserById = (req, res) => {
 exports.registerUser = async (req, res) => {
   if (req.body.username) {
     const user = await User.findOne({ username: req.body.username });
-    if (!Object.keys(user).length) {
+    if (user) {
       return res.status(BAD_REQUEST).json({
         error: 'username exist'
       });
@@ -39,7 +39,7 @@ exports.registerUser = async (req, res) => {
   }
   if (req.body.email) {
     const user = await User.findOne({ email: req.body.email });
-    if (!Object.keys(user).length) {
+    if (user) {
       return res.status(BAD_REQUEST).json({
         error: 'email exist'
       });
@@ -158,6 +158,20 @@ exports.updatePhoto = async (req, res) => {
   } catch (error) {
     return handleError(res, {
       message: error
+    });
+  }
+};
+exports.deleteUser = async (req, res) => {
+  const { id } = req.query;
+  const user = await User.findById(id);
+  if (user) {
+    user.remove();
+    handleSuccess(res, {
+      message: 'Remove user success'
+    });
+  } else {
+    handleError(res, {
+      message: 'User not found'
     });
   }
 };
