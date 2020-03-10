@@ -162,7 +162,7 @@ exports.updatePhoto = async (req, res) => {
   }
 };
 exports.deleteUser = async (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
   const user = await User.findById(id);
   if (user) {
     user.remove();

@@ -23,9 +23,9 @@ router.route('/login').post(loginUser);
 router.route('/edit/:id').post(authMiddleware, editUser);
 router.route('/:id').get(getUserById);
 router.route('/edit/:id').get(authMiddleware, editUser);
+router.route('/delete/:id').delete(deleteUser);
 router
   .route('/upload/photo')
   .post(authMiddleware, upload.single('image'), updatePhoto);
-router.route('/delete/:id').get(deleteUser);
 
 module.exports = router;
