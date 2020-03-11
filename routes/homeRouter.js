@@ -9,5 +9,6 @@ const authRouter = require('./authRouter');
 
 router.use('/blog', blogRouter);
 router.use('/auth', authRouter);
+router.use('/product', productRouter);
 
 module.exports = router;

@@ -140,7 +140,7 @@ exports.editUser = async (req, res) => {
 exports.updatePhoto = async (req, res) => {
   const imagePath = path.join('public/images');
   const fileUpload = new ResizeImage(imagePath);
-  const { id } = req.query;
+  const { id } = req.params;
   if (id !== req.auth.id && req.isRole !== roleEnum.Admin) {
     return handleError(res, {
       message: 'Not owned'

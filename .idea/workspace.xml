@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f03d64f-42a9-4aab-9412-15ff78b3b326" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/authControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/authControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/productControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/productControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper/resizeImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/helper/resizeImage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Product.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/authRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/authRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/homeRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/homeRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/productRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/productRouter.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +34,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.19.0" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -68,10 +77,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="278" y="59" width="810" height="677" key="#ESLint" timestamp="1583380088598">
+    <state x="278" y="59" width="800" height="677" key="#ESLint" timestamp="1583906317367">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="278" y="59" width="810" height="677" key="#ESLint/0.27.1366.741@0.27.1366.741" timestamp="1583380088598" />
+    <state x="278" y="59" width="800" height="677" key="#ESLint/0.27.1366.741@0.27.1366.741" timestamp="1583906317367" />
     <state x="379" y="194" width="598" height="406" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583895656091">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
