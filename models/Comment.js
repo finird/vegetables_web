@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const mongoose = require('mongoose');
 
 const commentSchema = new Schema({
   userId: {
@@ -16,18 +17,25 @@ const commentSchema = new Schema({
   /** `Frontend` size validation. */
   content: {
     type: String,
-    required: [true, "Comment's content is required!"]
-    // value: {
-    //   validator: function(v) {
-    //     return v.length > 500;
-    //   },
-    //   message: props => `Content out of sizes!`
-    // }
+    required: [true, "Comment's content is required!"],
+    max: 1000,
+    trim: true
+  },
+  isParent: {
+    type: Boolean,
+    default: true
   }
 });
 
 commentSchema.add({
-  replies: [{ type: commentSchema, _id: false, default: null }]
+  replies: [
+    {
+      type: commentSchema,
+      default: null,
+      _id: false
+    }
+  ]
 });
 
-module.exports = commentSchema;
+const Comment = mongoose.model('Comment', commentSchema, 'comment');
+module.exports = Comment;
