@@ -9,7 +9,8 @@ const productSchema = new Schema({
   name: {
     type: String,
     require: [true, 'Name product is required'],
-    trim: true
+    trim: true,
+    unique: true
   },
   ratingAverage: {
     min: 0,
@@ -56,10 +57,12 @@ const productSchema = new Schema({
   },
   images: {
     type: [String],
+    default: [],
     require: [true, 'Image is required']
   },
   imageCover: {
     type: [String],
+    default: [],
     require: [true, 'Image cover is required']
   },
   size: {
@@ -68,6 +71,7 @@ const productSchema = new Schema({
     require: true
   },
   quantity: {
+    type: Number,
     min: 0,
     require: [true, 'Quantity is required']
   },
