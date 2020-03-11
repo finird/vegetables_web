@@ -1,33 +1,39 @@
 const router = require('express').Router();
+const commentRouter = require('./commentRouter');
+const tagRouter = require('./tagRouter');
+const UserRoles = require('../constant/userRoles');
 
+const auth = require('../middlewares/auth.middleware');
+const authRoles = require('../middlewares/authRoles.middleware');
+const blogOwner = require('../middlewares/blog.owner.middlewares');
 const {
-  getAllPosts,
-  getPostById,
-  search,
-  getPostsByUser,
-  getPostByUser,
-  getPostsByCategory
+  getAllBlogs,
+  getBlogById,
+  postNewBlog,
+  updateBlog,
+  deleteBlog
 } = require('../controllers/blogControllers');
 
-// GET all Posts
-router.route('/').get(getAllPosts);
-router.route('/posts').get(getAllPosts);
+// `Comment` router merge
+// router.use('/posts/:postName/comments', commentRouter);
 
-// GET Post
-router.route('/posts/:postName').get(getPostById);
+// `Tag` router merge
+router.use('/tag', tagRouter);
 
-// GET Posts by Category
-router.route('/category/:id').get(getPostsByCategory);
+router
+  .route('/')
+  .get(getAllBlogs)
+  .post(postNewBlog);
 
-// GET (Search) Posts by Category and User
-router.route('/search').get(search);
-
-// GET Posts by User
-// TODO: fix `post-name` route to slug
-router.route('/user/:userId/').get(getPostsByUser);
-
-// Get Post by User and Post name
-// TODO: fix `post-name` route to slug
-router.route('/user/:userId/:postName').get(getPostByUser);
+router
+  .route('/:blog')
+  .get(getBlogById)
+  .patch(auth, authRoles([UserRoles.Edit]), blogOwner(false), updateBlog)
+  .delete(
+    auth,
+    authRoles([UserRoles.Edit, UserRoles.Admin]),
+    blogOwner(true),
+    deleteBlog
+  );
 
 module.exports = router;
