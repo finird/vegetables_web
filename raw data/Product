@@ -4,7 +4,7 @@ Product issues:
   Category
 
 Product: {
-  name: String, trim, 
+  name: String, trim,
   ratingAverage: Double,
   ratingsQuantity: Number, default: 0,
   price: Double(ex: 40.500VND/kg = 40.5), required,
@@ -22,13 +22,13 @@ Product: {
   imageCover: String, required,
   sizes: {
     required,
-    small: boolean,
+    small: [boolean],
     medium: boolean,
     large: boolean,
     extra large: boolean
-  }, 
+  },
   quantity: {
-    quantity: Double, 
+    quantity: Double,
     (*) min: 100,
     required
   },
