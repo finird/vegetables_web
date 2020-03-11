@@ -8,9 +8,11 @@ const SchemaTypes = mongoose.Schema.Types;
 const productSchema = new Schema({
   name: {
     type: String,
-    require: [true, 'Name product is required']
+    require: [true, 'Name product is required'],
+    trim: true
   },
   ratingAverage: {
+    min: 0,
     type: SchemaTypes.Double,
     default: 0
   },
@@ -61,10 +63,9 @@ const productSchema = new Schema({
     require: [true, 'Image cover is required']
   },
   size: {
-    small: String,
-    medium: String,
-    large: String,
-    extraLarge: String
+    type: Number,
+    default: 1,
+    require: true
   },
   quantity: {
     min: 0,

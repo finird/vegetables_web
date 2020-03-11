@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7f03d64f-42a9-4aab-9412-15ff78b3b326" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw data/Product" beforeDir="false" afterPath="$PROJECT_DIR$/raw data/Product" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Product.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Product.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +41,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -62,7 +60,7 @@
       <workItem from="1583379422400" duration="7131000" />
       <workItem from="1583471812989" duration="599000" />
       <workItem from="1583473240468" duration="3000" />
-      <workItem from="1583889906444" duration="5364000" />
+      <workItem from="1583889906444" duration="6589000" />
     </task>
     <servers />
   </component>
@@ -82,6 +80,10 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="461" y="155" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1583379759260" />
+    <state x="172" y="32" key="SettingsEditor" timestamp="1583901085256">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="172" y="32" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1583901085256" />
     <state x="347" y="176" key="run.anything.popup" timestamp="1583380124958">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
