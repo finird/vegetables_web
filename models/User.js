@@ -89,7 +89,7 @@ const userSchema = new Schema({
     trim: true
   }
 });
-userSchema.pre('save',async function(next) {
+userSchema.pre('save', async function(next) {
   const user = this;
   if (this.isNew) {
     user.salt = await bcrypt.genSaltSync(12);
