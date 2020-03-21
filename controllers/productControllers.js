@@ -1,27 +1,57 @@
 const path = require('path');
 const fs = require('fs');
+
 const Product = require('../models/Product');
 const { handleError, handleSuccess } = require('../helper/handle');
 const ResizeImage = require('../helper/resizeImage');
+const ImageSizes = require('../constant/imageSize');
+const APIFeatures = require('../utils/APIfeatures');
+
 const productsImagePath = 'public/products';
+
 exports.getAll = async (req, res) => {
   const products = await Product.find();
+  let filter = {};
+  if (req.params.product) filter = { product: req.params.product };
+
+  const features = new APIFeatures(Product.find(filter), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
   return handleSuccess(res, {
-    products
+    data: products
   });
 };
+
+exports.getById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    return handleSuccess(res, {
+      data: product
+    });
+  } catch (e) {
+    handleError(res, {
+      requestAt: new Date().toISOString(),
+      status: 'fail',
+      message: 'No product found'
+    });
+  }
+};
+
 exports.createProduct = async (req, res) => {
+  console.log(req.body);
   const product = new Product(req.body);
   product.ratingsQuantity = new Date();
   product.storageTime = new Date();
   product.save(function(error) {
     if (error) {
       return handleError(res, {
-        message: error
+        message: error.message
       });
     }
     return handleSuccess(res, {
-      product
+      data: product
     });
   });
 };
@@ -31,10 +61,12 @@ exports.uploadImage = async (req, res) => {
   if (!fs.existsSync(imagePath)) {
     fs.mkdirSync(imagePath);
   }
-  const fileUpload = new ResizeImage(imagePath, {
-    width: 250,
-    height: 250
-  });
+
+  const fileUpload = new ResizeImage(
+    imagePath,
+    ImageSizes.FullHD,
+    req.file.mimetype
+  );
   const { id } = req.params;
   const product = await Product.findById(id);
   if (!req.file) {
@@ -43,12 +75,10 @@ exports.uploadImage = async (req, res) => {
   try {
     const filename = await fileUpload.save(req.file.buffer);
     product.images.push(`${imagePath}/${filename}`);
-    console.log(filename);
     product.save(err => {
-      console.log(err);
       if (err) {
         return handleError(res, {
-          message: err
+          message: err.message
         });
       }
       return handleSuccess(res, {
@@ -57,10 +87,11 @@ exports.uploadImage = async (req, res) => {
     });
   } catch (error) {
     return handleError(res, {
-      message: error
+      message: error.message
     });
   }
 };
+
 exports.deleteImage = async (req, res) => {
   const { id, filename } = req.params;
   const product = await Product.findById(id);
@@ -71,7 +102,7 @@ exports.deleteImage = async (req, res) => {
     product.save(err => {
       if (err) {
         return handleError(res, {
-          message: err
+          message: err.message
         });
       }
       try {
@@ -81,7 +112,7 @@ exports.deleteImage = async (req, res) => {
         console.log(e);
       }
       return handleSuccess(res, {
-        product
+        data: product
       });
     });
   } else {

@@ -92,8 +92,8 @@ const userSchema = new Schema({
 userSchema.pre('save', async function(next) {
   const user = this;
   if (this.isNew) {
-    user.salt = await bcrypt.genSaltSync(12);
-    const hash = await bcrypt.hashSync(user.password, this.salt);
+    user.salt = await bcrypt.genSalt(12);
+    const hash = await bcrypt.hash(user.password, user.salt);
     user.password = hash;
     next();
   }
@@ -101,11 +101,12 @@ userSchema.pre('save', async function(next) {
 });
 
 userSchema.methods = {
-  authenticate: function(password) {
-    const hash = bcrypt.hashSync(password, this.salt);
+  authenticate: async function(password) {
+    const hash = await bcrypt.hash(password, this.salt);
     return hash === this.password;
   }
 };
+
 const User = mongoose.model('User', userSchema, 'User');
 exports.UserModel = userSchema;
 module.exports = User;

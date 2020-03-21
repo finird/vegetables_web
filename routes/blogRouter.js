@@ -28,7 +28,12 @@ router
 router
   .route('/:blog')
   .get(getBlogById)
-  .patch(auth, authRoles([UserRoles.Edit]), blogOwner(false), updateBlog)
+  .patch(
+    auth,
+    authRoles([UserRoles.Edit, UserRoles.Admin]),
+    blogOwner(false),
+    updateBlog
+  )
   .delete(
     auth,
     authRoles([UserRoles.Edit, UserRoles.Admin]),

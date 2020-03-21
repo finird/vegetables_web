@@ -8,7 +8,7 @@ const SchemaTypes = mongoose.Schema.Types;
 const productSchema = new Schema({
   name: {
     type: String,
-    require: [true, 'Name product is required'],
+    required: [true, 'Name product is required'],
     trim: true,
     unique: true
   },
@@ -30,7 +30,7 @@ const productSchema = new Schema({
   ],
   price: {
     type: SchemaTypes.Double,
-    require: [true, 'Price is required']
+    required: [true, 'Price is required']
   },
   discount: {
     price: SchemaTypes.Double,
@@ -58,12 +58,12 @@ const productSchema = new Schema({
   images: {
     type: [String],
     default: [],
-    require: [true, 'Image is required']
+    required: [true, 'Image is required']
   },
   imageCover: {
     type: [String],
     default: [],
-    require: [true, 'Image cover is required']
+    required: [true, 'Image cover is required']
   },
   size: {
     type: Number,
@@ -73,7 +73,7 @@ const productSchema = new Schema({
   quantity: {
     type: Number,
     min: 0,
-    require: [true, 'Quantity is required']
+    required: [true, 'Quantity is required']
   },
   unit: {
     type: String,
@@ -90,15 +90,15 @@ const productSchema = new Schema({
   },
   category: {
     type: Number,
-    require: [true, 'Category is required']
+    required: [true, 'Category is required']
   },
   storageTime: {
     type: Date,
-    require: [true, 'Storage Time is required']
+    required: [true, 'Storage Time is required']
   },
   expireDate: {
     type: Date,
-    require: [true, 'Expire date is required']
+    required: [true, 'Expire date is required']
   }
 });
 
