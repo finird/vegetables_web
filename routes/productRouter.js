@@ -4,13 +4,18 @@ const {
   getAll,
   createProduct,
   uploadImage,
-  deleteImage
+  deleteImage,
+  getById
 } = require('../controllers/productControllers');
 const upload = require('../middlewares/upload.middleware');
 
-router.route('/get-all').get(getAll);
-router.route('/create').post(createProduct);
-router.route('/upload/photo/:id').post(upload.single('image'), uploadImage);
-router.route('/delete/photo/:id/:filename').delete(deleteImage);
+router
+  .route('/')
+  .get(getAll)
+  .post(createProduct);
+
+router.route('/:id/upload').post(upload.single('image'), uploadImage);
+router.route('/:id/delete/:filename').delete(deleteImage);
+router.route('/:id').get(getById);
 
 module.exports = router;

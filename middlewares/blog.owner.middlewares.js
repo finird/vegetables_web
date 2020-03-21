@@ -8,7 +8,7 @@ const UserRoles = require('../constant/userRoles');
  * @param: adminPermission
  */
 module.exports = function(adminPermission = false) {
-  if (adminPermission) {
+  if (!adminPermission) {
     return function(req, res, next) {
       if (req.auth.roles === UserRoles.Admin) next();
       return Helper.handleError(res, {
@@ -20,7 +20,10 @@ module.exports = function(adminPermission = false) {
   }
   return async function(req, res, next) {
     const user = req.auth;
-    const blogID = req.params.blog ? req.body.blog : null;
+
+    // FIXME: multi :blog
+    let blogID = req.params.blog;
+    if (!blogID) blogID = req.body.blog;
 
     if (!blogID) {
       return Helper.handleError(res, {
@@ -32,7 +35,7 @@ module.exports = function(adminPermission = false) {
 
     const blog = await Blog.findById(blogID, 'author');
 
-    if (user._id === blog.author) next();
+    if (blog.isAuthor(user._id)) next();
     else
       return Helper.handleError(res, {
         requestAt: new Date().toISOString(),

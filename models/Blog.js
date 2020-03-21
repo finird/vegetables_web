@@ -55,5 +55,11 @@ const blogSchema = new Schema({
   }
 });
 
+blogSchema.methods = {
+  isAuthor: function(userId) {
+    return this.author.equals(userId);
+  }
+};
+
 const Blog = mongoose.model('Blog', blogSchema, 'blog');
 module.exports = Blog;

@@ -6,23 +6,20 @@ const APIFeatures = require('../utils/APIfeatures');
 exports.getBlogById = async function(req, res, next) {
   try {
     const result = await Blog.findById(req.params.blog);
-    return Helper.handleSuccess(res, result);
+    return Helper.handleSuccess(res, { data: result });
   } catch (err) {
-    return Helper.handleError(res, err);
+    return Helper.handleError(res, { message: err.message });
   }
 };
 
 exports.postNewBlog = async function(req, res, next) {
   try {
     const result = await Blog.create(req.body);
-    return Helper.handleSuccess(res, result);
+    return Helper.handleSuccess(res, { data: result });
   } catch (err) {
     return Helper.handleError(res, {
-      requestAt: new Date().toISOString(),
-      error: {
-        message: err.message,
-        name: err.name
-      }
+      message: err.message,
+      name: err.name
     });
   }
 };
@@ -30,19 +27,16 @@ exports.postNewBlog = async function(req, res, next) {
 exports.updateBlog = async function(req, res, next) {
   try {
     const result = await Blog.findByIdAndUpdate(req.body.blog, req.body);
-    return Helper.handleSuccess(res, result);
+    return Helper.handleSuccess(res, { data: result });
   } catch (err) {
-    return Helper.handleError(res, err);
+    return Helper.handleError(res, { message: err });
   }
 };
 
 exports.deleteBlog = async function(req, res, next) {
   try {
     await Blog.findByIdAndDelete(req.body.blog);
-    return Helper.handleSuccess(res, {
-      requestAt: new Date().toISOString(),
-      message: 'success'
-    });
+    return Helper.handleSuccess(res, { message: 'success' });
   } catch (err) {
     return Helper.handleError(res, err);
   }
@@ -59,11 +53,7 @@ exports.getAllBlogs = async (req, res, next) => {
   try {
     const doc = await features.query;
     return Helper.handleSuccess(res, {
-      status: 'success',
-      result: doc.length,
-      data: {
-        data: doc
-      }
+      data: doc
     });
   } catch (er) {
     return Helper.handleError(res, {

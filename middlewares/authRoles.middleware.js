@@ -12,6 +12,9 @@ function authRole(roles = []) {
     expressJwt({ secret }),
     // authorize based on user role
     (req, res, next) => {
+      console.log(roles);
+      console.log(req.auth.roles);
+      console.log(roles.includes(req.auth.roles));
       if (roles.length && !roles.includes(req.auth.roles)) {
         return handleError(res, {
           message: 'Unauthorized'

@@ -8,26 +8,21 @@ const roleEnum = require('../constant/roleEnum');
 
 exports.getAllUsers = async (req, res) => {
   const users = await User.find().select(SELECT_ALL);
-  return handleSuccess(res, {
-    data: {
-      users
-    }
-  });
+  return handleSuccess(res, { data: users });
 };
-exports.getUserById = (req, res) => {
+
+exports.getUserById = async (req, res) => {
   const { id } = req.params;
-  const user = User.findById(id);
-  if (!user) {
+  try {
+    const user = await User.findById(id);
+    return handleSuccess(res, { data: user });
+  } catch (err) {
     return handleError(res, {
       message: 'User not found'
     });
   }
-  return handleSuccess(res, {
-    data: {
-      user
-    }
-  });
 };
+
 exports.registerUser = async (req, res) => {
   if (req.body.username) {
     const user = await User.findOne({ username: req.body.username });
@@ -53,15 +48,17 @@ exports.registerUser = async (req, res) => {
   }
   user.save(function(err) {
     if (err) {
+      console.log(err);
       return handleError(res, {
         message: 'Create user failed'
       });
     }
     return handleSuccess(res, {
-      message: 'Create user success'
+      data: { message: 'Create user success' }
     });
   });
 };
+
 exports.loginUser = async (req, res) => {
   const { username, email, password } = req.body;
   let options = {};
@@ -100,11 +97,12 @@ exports.loginUser = async (req, res) => {
     });
     return handleSuccess(res, {
       token,
-      expire: new Date() + 9999,
+      expire: new Date(),
       message: 'Login success!'
     });
   });
 };
+
 exports.currentUser = (req, res) => {
   const { auth } = req;
   auth.password = '';
@@ -159,9 +157,7 @@ exports.updatePhoto = async (req, res) => {
           message: err
         });
       }
-      return handleSuccess(res, {
-        filename: `${imagePath}/${filename}`
-      });
+      return handleSuccess(res, {});
     });
   } catch (error) {
     return handleError(res, {
@@ -180,7 +176,7 @@ exports.deleteUser = async (req, res) => {
   if (user) {
     user.remove();
     handleSuccess(res, {
-      message: 'Remove user success'
+      data: { message: 'Remove user success' }
     });
   } else {
     handleError(res, {

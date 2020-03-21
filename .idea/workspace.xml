@@ -2,21 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f03d64f-42a9-4aab-9412-15ff78b3b326" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/authControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/authControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/productControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/productControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper/resizeImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/helper/resizeImage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Product.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/authRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/authRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/homeRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/homeRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/productRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/productRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/blogControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/blogControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/productControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/productControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper/handle.js" beforeDir="false" afterPath="$PROJECT_DIR$/helper/handle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper/resizeImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/helper/resizeImage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/authRoles.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/authRoles.middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/blog.owner.middlewares.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/blog.owner.middlewares.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Blog.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Blog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Product.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/blogRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/blogRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/productRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/productRouter.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +75,7 @@
       <workItem from="1583473240468" duration="3000" />
       <workItem from="1583889906444" duration="6589000" />
       <workItem from="1583902535492" duration="71000" />
+      <workItem from="1584512806000" duration="15000" />
     </task>
     <servers />
   </component>
