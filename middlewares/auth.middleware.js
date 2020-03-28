@@ -6,7 +6,7 @@ const authMiddleware = async (req, res, next) => {
   if (!req.header('Authorization')) {
     res
       .status(BAD_REQUEST)
-      .json({ error: 'Not authorized to access this resource' });
+      .json({ message: 'Not authorized to access this resource' });
   }
   const token = req.header('Authorization').replace('Bearer ', '');
   const data = jwt.verify(token, process.env.JWT_SECRET);
@@ -15,7 +15,7 @@ const authMiddleware = async (req, res, next) => {
     if (!user) {
       res
         .status(BAD_REQUEST)
-        .json({ error: 'Not authorized to access this resource' });
+        .json({ message: 'Not authorized to access this resource' });
     }
     req.auth = user;
     req.token = token;
@@ -23,7 +23,7 @@ const authMiddleware = async (req, res, next) => {
   } catch (error) {
     res
       .status(BAD_REQUEST)
-      .json({ error: 'Not authorized to access this resource' });
+      .json({ message: 'Not authorized to access this resource' });
   }
 };
 module.exports = authMiddleware;

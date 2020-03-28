@@ -92,6 +92,10 @@ const productSchema = new Schema({
     type: Number,
     required: [true, 'Category is required']
   },
+  type: {
+    type: String,
+    required: [true, 'Type is required']
+  },
   storageTime: {
     type: Date,
     required: [true, 'Storage Time is required']

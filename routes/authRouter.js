@@ -15,7 +15,7 @@ const userRoles = require('../constant/userRoles');
 const upload = require('../middlewares/upload.middleware');
 const isRole = require('../middlewares/isRole.middleware');
 
-router.route('/register').post(isRole, registerUser);
+router.route('/register').post(isRole, registerUser); 
 router.route('/current-user').get(isRole, authMiddleware, currentUser);
 router.route('/get-all').get(getAllUsers);
 router.route('/login').post(loginUser);

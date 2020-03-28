@@ -27,6 +27,7 @@ exports.registerUser = async (req, res) => {
   if (req.body.username) {
     const user = await User.findOne({ username: req.body.username });
     if (user) {
+      console.log(user);
       return handleError(res, {
         message: 'username exist'
       });
@@ -35,6 +36,7 @@ exports.registerUser = async (req, res) => {
   if (req.body.email) {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
+      console.log(user);
       return handleError(res, {
         message: 'email exist'
       });

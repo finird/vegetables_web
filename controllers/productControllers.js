@@ -8,17 +8,18 @@ const ImageSizes = require('../constant/imageSize');
 const APIFeatures = require('../utils/APIfeatures');
 
 const productsImagePath = 'public/products';
+const productsImage = 'products';
 
 exports.getAll = async (req, res) => {
   const products = await Product.find();
-  let filter = {};
-  if (req.params.product) filter = { product: req.params.product };
+  // let filter = {};
+  // if (req.params.product) filter = { product: req.params.product };
 
-  const features = new APIFeatures(Product.find(filter), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate();
+  // const features = new APIFeatures(Product.find(filter), req.query)
+  //   .filter()
+  //   .sort()
+  //   .limitFields()
+  //   .paginate();
   return handleSuccess(res, {
     data: products
   });
@@ -74,7 +75,7 @@ exports.uploadImage = async (req, res) => {
   }
   try {
     const filename = await fileUpload.save(req.file.buffer);
-    product.images.push(`${imagePath}/${filename}`);
+    product.images.push(`${productsImage}/${filename}`);
     product.save(err => {
       if (err) {
         return handleError(res, {

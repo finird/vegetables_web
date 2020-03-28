@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f03d64f-42a9-4aab-9412-15ff78b3b326" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/controllers/authControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/authControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/blogControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/blogControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/productControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/productControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper/handle.js" beforeDir="false" afterPath="$PROJECT_DIR$/helper/handle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper/resizeImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/helper/resizeImage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/authRoles.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/authRoles.middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/blog.owner.middlewares.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/blog.owner.middlewares.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Blog.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Blog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Product.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/blogRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/blogRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/productRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/productRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,13 +26,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.19.0" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../vegafood-web-app" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -76,6 +65,7 @@
       <workItem from="1583889906444" duration="6589000" />
       <workItem from="1583902535492" duration="71000" />
       <workItem from="1584512806000" duration="15000" />
+      <workItem from="1584891334063" duration="646000" />
     </task>
     <servers />
   </component>
@@ -91,10 +81,10 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="379" y="194" width="598" height="406" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1366.741@0.27.1366.741" timestamp="1583895656091" />
-    <state x="461" y="155" width="424" height="484" key="FileChooserDialogImpl" timestamp="1583379759260">
+    <state x="461" y="155" width="424" height="484" key="FileChooserDialogImpl" timestamp="1584891978760">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="461" y="155" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1583379759260" />
+    <state x="461" y="155" width="424" height="484" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1584891978760" />
     <state x="172" y="32" key="SettingsEditor" timestamp="1583901085256">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
